@@ -4,7 +4,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('grid verge col-md-4 grid_3_column'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('grid verge col-md-4 col-sm-4 col-xs-6 grid_3_column'); ?>>
 
 
 		<div class="featured-thumb col-md-12">

@@ -18,12 +18,12 @@ function verge_custom_css_mods() {
 		echo ".title-font, h1, h2, .section-title { font-family: ".esc_html(get_theme_mod('verge_title_font'))."; }";
 	endif;
 	
-	if ( get_theme_mod('verge_body_font','Source Sans Pro') ) :
-		echo "body { font-family: ".esc_html(get_theme_mod('verge_body_font'))."; }";
+	if ( get_theme_mod('verge_body_font','PT Sans') ) :
+		echo "body, h2.site-description { font-family: ".esc_html(get_theme_mod('verge_body_font'))."; }";
 	endif;
 	
 	if ( get_theme_mod('verge_site_titlecolor') ) :
-		echo "#masthead h1.site-title a { color: ".esc_html(get_theme_mod('verge_site_titlecolor', '#FFF'))."; }";
+		echo "#masthead h1.site-title a { color: ".esc_html(get_theme_mod('verge_site_titlecolor', '#4cb2ed'))."; }";
 	endif;
 	
 	

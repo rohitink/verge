@@ -20,7 +20,7 @@ function verge_customize_register( $wp_customize ) {
 	$wp_customize->remove_control('display_header_text');
 	$wp_customize->remove_setting('header_textcolor');
 	$wp_customize->add_setting('verge_site_titlecolor', array(
-	    'default'     => '#FFF',
+	    'default'     => '#4cb2ed',
 	    'sanitize_callback' => 'sanitize_hex_color',
 	));
 	
@@ -35,7 +35,7 @@ function verge_customize_register( $wp_customize ) {
 	);
 	
 	$wp_customize->add_setting('verge_header_desccolor', array(
-	    'default'     => '#FFF',
+	    'default'     => '#777',
 	    'sanitize_callback' => 'sanitize_hex_color',
 	));
 	
@@ -317,84 +317,7 @@ function verge_customize_register( $wp_customize ) {
 	    'title'          => __('Featured Posts (Homepage)','verge'),
 	) );
 	
-	
-	
-	for ($i = 1; $i < 3; $i++) :
-	
-	$wp_customize->add_section(
-	    'verge_featposts'.$i,
-	    array(
-	        'title'     => __('Featured Category ','verge').$i,
-	        'priority'  => 35,
-	        'panel' => 'verge_featposts',
-	    )
-	);
-	
-	$wp_customize->add_setting(
-		'verge_featposts_enable'.$i,
-		array( 'sanitize_callback' => 'verge_sanitize_checkbox' )
-	);
-	
-	$wp_customize->add_control(
-			'verge_featposts_enable'.$i, array(
-		    'settings' => 'verge_featposts_enable'.$i,
-		    'label'    => __( 'Enable', 'verge' ),
-		    'section'  => 'verge_featposts'.$i,
-		    'type'     => 'checkbox',
-		)
-	);
-	
-	
-	$wp_customize->add_setting(
-		'verge_featposts_title'.$i,
-		array( 'sanitize_callback' => 'sanitize_text_field' )
-	);
-	
-	$wp_customize->add_control(
-			'verge_featposts_title'.$i, array(
-		    'settings' => 'verge_featposts_title'.$i,
-		    'label'    => __( 'Title', 'verge' ),
-		    'section'  => 'verge_featposts'.$i,
-		    'type'     => 'text',
-		)
-	);
-	
-	$wp_customize->add_setting(
-		'verge_featposts_icon'.$i,
-		array( 'sanitize_callback' => 'sanitize_text_field', 'default' => 'fa-star' )
-	);
-	
-	$wp_customize->add_control(
-			'verge_featposts_icon'.$i, array(
-		    'settings' => 'verge_featposts_icon'.$i,
-		    'label'    => __( 'Title Icon', 'verge' ),
-		    'section'  => 'verge_featposts'.$i,
-		    'type'     => 'text',
-		    'description' => __('Icon Class should be entered in this format: <strong>fa-video, fa-star, fa-envelope-o</strong>. List of Support Icons and Classes <a href="http://fontawesome.io/cheatsheet/" target="_blank">Available Here.</a>','verge'),
-		)
-	);
-	
-	$wp_customize->add_setting(
-		    'verge_featposts_cat'.$i,
-		    array( 'sanitize_callback' => 'verge_sanitize_category' )
-		);
-	
-		
-	$wp_customize->add_control(
-	    new Verge_WP_Customize_Category_Control(
-	        $wp_customize,
-	        'verge_featposts_cat'.$i,
-	        array(
-	            'label'    => __('Category For Featured Posts','verge'),
-	            'settings' => 'verge_featposts_cat'.$i,
-	            'section'  => 'verge_featposts'.$i,
-	        )
-	    )
-	);
-	
-	
-	
-	endfor;
+
 		
 	// Layout and Design
 	$wp_customize->add_panel( 'verge_design_panel', array(
@@ -437,6 +360,34 @@ function verge_customize_register( $wp_customize ) {
 						'grid' => __('Basic Blog Layout','verge'),
 						'grid_2_column' => __('Grid - 2 Column','verge'),
 						'grid_3_column' => __('Grid - 3 Column','verge'),
+						
+					)
+			)
+	);
+	
+	//Choose Single Page Layout
+	$wp_customize->add_setting(
+		'verge_single_layout',
+		array( 'sanitize_callback' => 'verge_sanitize_single_layout', 'default' => 'gradial-layout' )
+	);
+	
+	function verge_sanitize_single_layout( $input ) {
+		if ( in_array($input, array('gradial-layout','default-layout') ) )
+			return $input;
+		else 
+			return '';	
+	}
+	
+	$wp_customize->add_control(
+		'verge_single_layout',array(
+				'label' => __('Select Single Posts Page Layout','verge'),
+				'settings' => 'verge_single_layout',
+				'section'  => 'verge_design_options',
+				'type' => 'select',
+				'choices' => array(
+						'gradial-layout' => __('Right Gradient Layout','verge'),
+						'default-layout' => __('Verge Layout','verge'),
+						
 						
 					)
 			)
@@ -562,7 +513,7 @@ function verge_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 	    'verge_sec_upgrade',
 	    array(
-	        'title'     => __('Upgrade to Verge Pro Version','verge'),
+	        'title'     => __('Upgrade to Verge Plus','verge'),
 	        'priority'  => 1,
 	    )
 	);
@@ -578,7 +529,7 @@ function verge_customize_register( $wp_customize ) {
 	        'verge_upgrade',
 	        array(
 	            'label' => __('Thank You','verge'),
-	            'description' => __('Thank You for Choosing Verge. Verge Plus is a Powerful Wordpress theme which also supports WooCommerce in the best possible way. It is "as we say" the last theme you would ever need. It has all the basic and advanced features needed to run a gorgeous looking site. If you are looking for more features and to support us, please  <a href="https://inkhive.com/product/verge-plus/">purchase Verge Plus</a>.','verge'),
+	            'description' => __('Thank You for Choosing Verge. Verge Plus is a Powerful Wordpress theme which also supports WooCommerce in the best possible way. It is "as we say" the last theme you would ever need. It has all the basic and advanced features needed to run a gorgeous looking site. If you are looking for more features and to support the themes we develop for free, please  <a href="https://inkhive.com/product/verge-plus/">purchase Verge Plus</a>.','verge'),
 	            'section' => 'verge_sec_upgrade',
 	            'settings' => 'verge_upgrade',			       
 	        )
@@ -593,7 +544,7 @@ function verge_customize_register( $wp_customize ) {
 	    )
 	);
 	
-	$font_array = array('Fjalla One','Khula','Open Sans','Droid Sans','Droid Serif','Roboto','Roboto Condensed','Lato','Bree Serif','Oswald','Slabo','Lora','Source Sans Pro','PT Sans','Ubuntu','Lobster','Arimo','Bitter','Noto Sans');
+	$font_array = array('Fjalla One','PT Sans','Open Sans','Droid Sans','Droid Serif','Roboto','Roboto Condensed','Lato','Bree Serif','Oswald','Slabo','Lora','Source Sans Pro','PT Sans','Ubuntu','Lobster','Arimo','Bitter','Noto Sans');
 	$fonts = array_combine($font_array, $font_array);
 	
 	$wp_customize->add_setting(
@@ -605,7 +556,7 @@ function verge_customize_register( $wp_customize ) {
 	);
 	
 	function verge_sanitize_gfont( $input ) {
-		if ( in_array($input, array('Source Sans Pro','Khula','Open Sans','Droid Sans','Droid Serif','Roboto','Roboto Condensed','Lato','Bree Serif','Oswald','Slabo','Lora','PT Sans','Ubuntu','Lobster','Arimo','Bitter','Noto Sans') ) )
+		if ( in_array($input, array('Source Sans Pro','PT Sans','Open Sans','Droid Sans','Droid Serif','Roboto','Roboto Condensed','Lato','Bree Serif','Oswald','Slabo','Lora','PT Sans','Ubuntu','Lobster','Arimo','Bitter','Noto Sans') ) )
 			return $input;
 		else
 			return '';	
@@ -623,7 +574,7 @@ function verge_customize_register( $wp_customize ) {
 	
 	$wp_customize->add_setting(
 		'verge_body_font',
-			array(	'default'=> 'Source Sans Pro',
+			array(	'default'=> 'PT Sans',
 					'sanitize_callback' => 'verge_sanitize_gfont' )
 	);
 	

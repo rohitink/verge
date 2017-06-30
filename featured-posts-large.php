@@ -20,7 +20,7 @@
 				        while ( $loop->have_posts() ) : 
 				        	$loop->the_post(); 
 				        ?>
-				        <div class="fg-item-container col-md-4">
+				        <div class="fg-item-container col-md-4 col-sm-4">
 							<div class="fg-item">
 								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute() ?>">
 									<?php the_post_thumbnail('verge-pop-thumb'); ?>

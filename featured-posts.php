@@ -30,21 +30,22 @@
 						?>                                   
 
 						<div class="fg-item-container">
+							<a href="<?php the_permalink() ?>" title="<?php the_title_attribute() ?>">
 							<div class="fg-item">
 								<div class="gradient-layer"></div>
-								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute() ?>">
+								
 									<?php if ($count == 1) 
 										the_post_thumbnail('verge-pop-thumb-lg');
 										else
 											the_post_thumbnail('verge-pop-thumb'); ?>
 									<div class="product-details">
 										<a class="cat-link" href="<?php echo $category_link ?>"><?php echo $category_name ?></a>
-										<h3><?php the_title(); ?></h3>
+										<h3><a href="<?php the_permalink() ?>" title="<?php the_title_attribute() ?>"><?php the_title(); ?></a></h3>
 									</div>
-								</a>
-								
 								</div>
-						</div>					
+							</a>	
+						</div>
+										
 						 <?php 
 							 $count++;
 							 endwhile; ?>

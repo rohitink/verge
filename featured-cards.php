@@ -20,7 +20,7 @@
 				        while ( $loop->have_posts() ) : 
 				        	$loop->the_post(); 
 				        ?>
-				        <div class="fg-item-container col-md-3">
+				        <div class="fg-item-container col-md-3 col-xs-6">
 							<div class="fg-item">
 								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute() ?>">
 									<div class="icon"><i class="fa fa-thumb-tack fa-fw"></i></div>
